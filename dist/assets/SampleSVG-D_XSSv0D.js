@@ -1,0 +1,5 @@
+import{j as s,B as a}from"./index-BK1bU2bz.js";const x="_container_1qle1_1",F="_svg_1qle1_21",m="_bg_1qle1_37",_="_fg_1qle1_49",g="_text_1qle1_65",d="_lineSvg_1qle1_83",i="_marker_1qle1_101",e={container:x,svg:F,bg:m,fg:_,text:g,lineSvg:d,marker:i},v=({percentage:r,isWhiteBg:t})=>{const n=t?"#1F6A7525":"#FFFFFF25",o="#F49040",l=t?"#1F6A75":"#FFFFFF",c=t?"#1F6A7535":"#FFFFFF35";return s.jsxs(a,{className:e.container,width:{base:"150%",md:"100%",lg:"120%"},children:[s.jsxs("svg",{className:e.svg,viewBox:"0 0 36 36",children:[s.jsx("path",{className:e.bg,d:`M18 2.0845\r
+               a 15.9155 15.9155 0 0 1 0 31.831\r
+               a 15.9155 15.9155 0 0 1 0 -31.831`,stroke:n}),s.jsx("path",{className:e.fg,strokeDasharray:`${r}, 100`,d:`M18 2.0845\r
+               a 15.9155 15.9155 0 0 1 0 31.831\r
+               a 15.9155 15.9155 0 0 1 0 -31.831`,stroke:o}),s.jsxs("text",{x:"50%",y:"50%",textAnchor:"middle",dy:".3em",transform:"rotate(90, 18, 18)",className:e.text,fill:l,children:[r,"%"]})]}),s.jsx(a,{className:e.lineSvg,width:{base:"2px",md:"3px",lg:"4px"},children:s.jsx(a,{className:e.marker,style:{background:c}})})]})};export{v as default};

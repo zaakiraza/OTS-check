@@ -1,0 +1,1 @@
+import{j as e,B as o}from"./index-BK1bU2bz.js";const n="_container_1ua71_39",t="_content_1ua71_73",r="_circle1_1ua71_93",i="_moveCircle1_1ua71_1",_="_circle2_1ua71_151",s="_moveCircle2_1ua71_1",a={container:n,content:t,circle1:r,moveCircle1:i,circle2:_,moveCircle2:s};function m({children:c}){return e.jsx(o,{className:a.container,children:c})}export{m as B};

@@ -1,0 +1,669 @@
+{
+  "info": {
+    "name": "Quiz API",
+    "description": "Complete Quiz API collection with CRUD operations, delivery, and attempts/results",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5003/api",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "quizId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "questionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "optionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "attemptId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "studentId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Quiz Management",
+      "item": [
+        {
+          "name": "1. Create Quiz",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.id) {",
+                  "        pm.collectionVariables.set('quizId', response.data.id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Math Quiz 1\",\n  \"entity_type\": \"Lesson\",\n  \"entity_id\": 123,\n  \"time_limit_sec\": 600,\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Update Quiz",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Math Quiz 1\",\n  \"time_limit_sec\": 900,\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Delete Quiz",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "10. Publish/Unpublish Quiz",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/publish",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "publish"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "11. List Attempts for Quiz",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/attempts?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "attempts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "12. Quiz Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Question Management",
+      "item": [
+        {
+          "name": "4. Add Question with Options",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.question_id) {",
+                  "        pm.collectionVariables.set('questionId', response.data.question_id);",
+                  "    }",
+                  "    if (response.data && response.data.option_ids && response.data.option_ids.length > 0) {",
+                  "        pm.collectionVariables.set('optionId', response.data.option_ids[0]);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"What is 2 + 2?\",\n  \"points\": 1,\n  \"options\": [\n    { \"text\": \"3\" },\n    { \"text\": \"4\" },\n    { \"text\": \"5\" },\n    { \"text\": \"6\" }\n  ],\n  \"correct_option_index\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/questions",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "questions"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Update Question",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"What is 2 + 2? (Updated)\",\n  \"points\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/questions/{{questionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "questions", "{{questionId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Add Option to Question",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.id) {",
+                  "        pm.collectionVariables.set('optionId', response.data.id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"42\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/questions/{{questionId}}/options",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "questions", "{{questionId}}", "options"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "9. Set Correct Option",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"correct_option_id\": {{optionId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/questions/{{questionId}}/correct",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "questions", "{{questionId}}", "correct"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Option Management",
+      "item": [
+        {
+          "name": "7. Update Option",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Updated option text\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/options/{{optionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "options", "{{optionId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "8. Delete Option",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/options/{{optionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "options", "{{optionId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Student Quiz Taking",
+      "item": [
+        {
+          "name": "13. Get Quiz for Play",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/play",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "play"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "14. Start Attempt",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.data && response.data.attempt_id) {",
+                  "        pm.collectionVariables.set('attemptId', response.data.attempt_id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"student_id\": {{studentId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/attempts/start",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "attempts", "start"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "15. Submit Attempt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"student_id\": {{studentId}},\n  \"answers\": [\n    {\n      \"question_id\": {{questionId}},\n      \"selected_option_id\": {{optionId}}\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/{{quizId}}/attempts/{{attemptId}}/submit",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "{{quizId}}", "attempts", "{{attemptId}}", "submit"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Attempt Management",
+      "item": [
+        {
+          "name": "16. Get Attempt by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/attempts/{{attemptId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "attempts", "{{attemptId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "17. List Student Attempts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/quizzes/students/{{studentId}}/attempts?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["quizzes", "students", "{{studentId}}", "attempts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Scenarios",
+      "item": [
+        {
+          "name": "Complete Quiz Flow Test",
+          "item": [
+            {
+              "name": "1. Create Test Quiz",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Quiz created successfully', function () {",
+                      "    pm.response.to.have.status(201);",
+                      "    const response = pm.response.json();",
+                      "    pm.expect(response.status).to.be.true;",
+                      "    pm.expect(response.data).to.have.property('id');",
+                      "    pm.collectionVariables.set('quizId', response.data.id);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Test Quiz - Complete Flow\",\n  \"entity_type\": \"Lesson\",\n  \"entity_id\": 999,\n  \"time_limit_sec\": 1800,\n  \"is_active\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/quizzes",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["quizzes"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "2. Add Multiple Questions",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Question added successfully', function () {",
+                      "    pm.response.to.have.status(201);",
+                      "    const response = pm.response.json();",
+                      "    pm.expect(response.status).to.be.true;",
+                      "    pm.expect(response.data).to.have.property('question_id');",
+                      "    pm.collectionVariables.set('questionId', response.data.question_id);",
+                      "    pm.collectionVariables.set('optionId', response.data.option_ids[1]); // Second option (correct)",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"What is the capital of France?\",\n  \"points\": 2,\n  \"options\": [\n    { \"text\": \"London\" },\n    { \"text\": \"Paris\" },\n    { \"text\": \"Berlin\" },\n    { \"text\": \"Madrid\" }\n  ],\n  \"correct_option_index\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/quizzes/{{quizId}}/questions",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["quizzes", "{{quizId}}", "questions"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "3. Start Quiz Attempt",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Attempt started successfully', function () {",
+                      "    pm.response.to.have.status(201);",
+                      "    const response = pm.response.json();",
+                      "    pm.expect(response.status).to.be.true;",
+                      "    pm.expect(response.data).to.have.property('attempt_id');",
+                      "    pm.collectionVariables.set('attemptId', response.data.attempt_id);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"student_id\": {{studentId}}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/quizzes/{{quizId}}/attempts/start",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["quizzes", "{{quizId}}", "attempts", "start"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "4. Submit Quiz Answers",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Attempt submitted successfully', function () {",
+                      "    pm.response.to.have.status(200);",
+                      "    const response = pm.response.json();",
+                      "    pm.expect(response.status).to.be.true;",
+                      "    pm.expect(response.data).to.have.property('score');",
+                      "    pm.expect(response.data).to.have.property('answers');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"student_id\": {{studentId}},\n  \"answers\": [\n    {\n      \"question_id\": {{questionId}},\n      \"selected_option_id\": {{optionId}}\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/quizzes/{{quizId}}/attempts/{{attemptId}}/submit",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["quizzes", "{{quizId}}", "attempts", "{{attemptId}}", "submit"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "5. View Attempt Results",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Attempt results retrieved successfully', function () {",
+                      "    pm.response.to.have.status(200);",
+                      "    const response = pm.response.json();",
+                      "    pm.expect(response.status).to.be.true;",
+                      "    pm.expect(response.data).to.have.property('score');",
+                      "    pm.expect(response.data).to.have.property('submitted_at');",
+                      "    pm.expect(response.data).to.have.property('answers');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/quizzes/attempts/{{attemptId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["quizzes", "attempts", "{{attemptId}}"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

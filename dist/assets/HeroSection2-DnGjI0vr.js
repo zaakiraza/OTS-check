@@ -1,0 +1,5 @@
+import{k as a,j as e,F as s,S as r,H as o,T as n,B as x,h as m}from"./index-BK1bU2bz.js";const i="/assets/aboutus.png";function d({children:t}){return a`
+  0% { transform: rotate(0deg);}
+  50% { transform: rotate(30deg); }
+  100% { transform: rotate(0deg) }
+  `,e.jsxs(s,{maxW:"1436px",width:"92%",direction:{base:"column",md:"row"},align:"center",justify:"center",paddingTop:{base:"136px",sm:"164px",md:"112px"},textAlign:{base:"center",md:"left"},color:"white",mx:"auto",children:[e.jsxs(r,{spacing:4,maxW:"600px",width:"100%",marginLeft:{base:0,md:"36px"},children:[e.jsx(o,{fontSize:{base:"42px",sm:"54px",md:"64px"},fontWeight:"700",children:t}),e.jsx(n,{fontSize:{base:"16px",sm:"20px",md:"24px"},fontWeight:"400",color:"",children:"Welcome to Pakistan’s free edtech platform, where you can learn smartly at your own place."})]}),e.jsx(x,{pos:"relative",w:"auto",maxW:"720px",mt:{base:"18px",sm:"36px",md:0},children:e.jsx(m,{src:i,alt:"Image 2",borderRadius:"lg",pos:"relative",zIndex:2})})]})}export{d as H};

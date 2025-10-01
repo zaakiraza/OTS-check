@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "b9f9e9c9-5f5f-4f5f-9f9f-9f9f9f9f9f9f",
+		"name": "LessonComment API",
+		"description": "API endpoints for managing lesson comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Comments for a Lesson",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/lesson-comments/lesson/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lesson-comments",
+						"lesson",
+						"1"
+					]
+				},
+				"description": "Get all comments for a specific lesson with their replies"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comment by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/lesson-comments/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lesson-comments",
+						"1"
+					]
+				},
+				"description": "Get a specific comment by its ID with replies"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lessonId\": 1,\n    \"content\": \"This is a top-level comment\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/lesson-comments",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lesson-comments"
+					]
+				},
+				"description": "Create a new comment for a lesson"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reply",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lessonId\": 1,\n    \"parentId\": 1,\n    \"content\": \"This is a reply to a comment\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/lesson-comments",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lesson-comments"
+					]
+				},
+				"description": "Create a reply to an existing comment"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"Updated comment content\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/lesson-comments/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lesson-comments",
+						"1"
+					]
+				},
+				"description": "Update an existing comment (only the owner can update)"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/lesson-comments/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lesson-comments",
+						"1"
+					]
+				},
+				"description": "Delete a comment (owner or admin can delete)"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_auth_token_here",
+			"type": "string"
+		}
+	]
+} 

@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "e5f9e9c9-5f5f-4f5f-9f9f-9f9f9f9f9f9f",
+		"name": "Update Profile API",
+		"description": "API endpoint for updating user profile including educational info and courses",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Update Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"username\": \"johndoe123\",\n    \"dob\": \"1990-01-01\",\n    \"gender\": \"Male\",\n    \"imageUrl\": \"https://example.com/profile.jpg\",\n    \"qualification\": \"Bachelor's Degree\",\n    \"designation\": \"Software Engineer\",\n    \"youAre\": \"Professional\",\n    \"educationalInfo\": [\n        {\n            \"className\": \"Bachelor's in Computer Science\",\n            \"institutionType\": \"University\",\n            \"institutionName\": \"ABC University\",\n            \"boardSystem\": \"Semester System\",\n            \"passingYear\": 2020,\n            \"isCurrentEducation\": false\n        },\n        {\n            \"className\": \"Master's in Computer Science\",\n            \"institutionType\": \"University\",\n            \"institutionName\": \"XYZ University\",\n            \"boardSystem\": \"Semester System\",\n            \"passingYear\": 2022,\n            \"isCurrentEducation\": true\n        }\n    ],\n    \"courses\": [\n        {\n            \"courseName\": \"Web Development Bootcamp\",\n            \"institutionName\": \"Udemy\",\n            \"startDate\": \"2021-01-01\",\n            \"endDate\": \"2021-03-01\",\n            \"certificateUrl\": \"https://example.com/certificate1.pdf\",\n            \"isCompleted\": true\n        },\n        {\n            \"courseName\": \"Advanced React\",\n            \"institutionName\": \"Coursera\",\n            \"startDate\": \"2022-01-01\",\n            \"endDate\": null,\n            \"certificateUrl\": null,\n            \"isCompleted\": false\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/users/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				},
+				"description": "Update user profile with optional educational info and courses"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile - Basic Info Only",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"imageUrl\": \"https://example.com/profile.jpg\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/users/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				},
+				"description": "Update only basic user profile information"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile - Update Existing Educational Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"educationalInfo\": [\n        {\n            \"id\": 1,\n            \"className\": \"Bachelor's in Computer Science (Updated)\",\n            \"institutionType\": \"University\",\n            \"institutionName\": \"ABC University\",\n            \"boardSystem\": \"Semester System\",\n            \"passingYear\": 2020,\n            \"isCurrentEducation\": false\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/users/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				},
+				"description": "Update existing educational info by providing the ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile - Update Existing Courses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"courses\": [\n        {\n            \"id\": 1,\n            \"courseName\": \"Web Development Bootcamp (Updated)\",\n            \"institutionName\": \"Udemy\",\n            \"startDate\": \"2021-01-01\",\n            \"endDate\": \"2021-03-01\",\n            \"certificateUrl\": \"https://example.com/certificate1.pdf\",\n            \"isCompleted\": true\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/users/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				},
+				"description": "Update existing courses by providing the ID"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_auth_token_here",
+			"type": "string"
+		}
+	]
+} 

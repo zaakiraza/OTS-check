@@ -1,0 +1,56 @@
+[
+  {
+    "timestamp": "2025-08-03T01:57:29.661Z",
+    "model": "User",
+    "stats": {
+      "recordsExamined": 5,
+      "recordsUpdated": 1,
+      "urlsConverted": 1
+    }
+  },
+  {
+    "timestamp": "2025-08-03T01:57:33.565Z",
+    "model": "Subject",
+    "stats": {
+      "recordsExamined": 66,
+      "recordsUpdated": 66,
+      "urlsConverted": 66
+    }
+  },
+  {
+    "timestamp": "2025-08-03T01:58:14.934Z",
+    "model": "Chapter",
+    "stats": {
+      "recordsExamined": 727,
+      "recordsUpdated": 727,
+      "urlsConverted": 727
+    }
+  },
+  {
+    "timestamp": "2025-08-03T01:58:59.870Z",
+    "model": "Lesson",
+    "stats": {
+      "recordsExamined": 770,
+      "recordsUpdated": 769,
+      "urlsConverted": 769
+    }
+  },
+  {
+    "timestamp": "2025-08-03T01:58:59.928Z",
+    "model": "Course",
+    "stats": {
+      "recordsExamined": 1,
+      "recordsUpdated": 0,
+      "urlsConverted": 0
+    }
+  },
+  {
+    "timestamp": "2025-08-03T01:58:59.988Z",
+    "model": "Testimonial",
+    "stats": {
+      "recordsExamined": 3,
+      "recordsUpdated": 0,
+      "urlsConverted": 0
+    }
+  }
+]

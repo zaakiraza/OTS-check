@@ -1,0 +1,149 @@
+{
+  "info": {
+    "name": "Subject Rating API",
+    "description": "API collection for testing Subject Rating functionality",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Ratings for Subject",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/ratings/subject/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "ratings",
+            "subject",
+            "1"
+          ]
+        },
+        "description": "Get all ratings for a specific subject. This is a public endpoint that doesn't require authentication."
+      },
+      "response": []
+    },
+    {
+      "name": "Rate a Subject",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"subjectId\": 1,\n    \"rating\": 5,\n    \"comment\": \"Excellent course, highly recommended!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/ratings",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "ratings"
+          ]
+        },
+        "description": "Rate a subject or update an existing rating. Requires authentication."
+      },
+      "response": []
+    },
+    {
+      "name": "Get User's Rating for Subject",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/ratings/user/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "ratings",
+            "user",
+            "1"
+          ]
+        },
+        "description": "Get the current user's rating for a specific subject. Requires authentication."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Rating",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/ratings/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "ratings",
+            "1"
+          ]
+        },
+        "description": "Delete the user's rating for a specific subject. Requires authentication."
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    }
+  ]
+} 
